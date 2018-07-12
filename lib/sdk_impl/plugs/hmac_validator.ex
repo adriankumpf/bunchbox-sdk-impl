@@ -3,7 +3,6 @@ defmodule SdkImpl.Plugs.HMACValidator do
 
   require Logger
 
-  @key "af13463aa888d88cf5b7c9e51c7b1067c7211007ba54ad9092e9eda11791dc09"
   @header "x-bb-signature"
 
   def init(default), do: default
@@ -37,7 +36,11 @@ defmodule SdkImpl.Plugs.HMACValidator do
 
   # Private
 
-  defp valid?(payload, signature), do: hmac(payload, @key) === String.downcase(signature)
+  defp valid?(payload, signature), do: hmac(payload, key()) === String.downcase(signature)
 
   defp hmac(str, key), do: :crypto.hmac(:sha256, key, str) |> Base.encode16(case: :lower)
+
+  defp key do
+    with nil <- System.get_env("KEY"), do: throw(:key_is_required)
+  end
 end
