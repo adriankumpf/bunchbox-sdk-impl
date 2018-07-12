@@ -20,7 +20,7 @@ defmodule SdkImpl.MixProject do
 
   defp deps do
     [
-      {:cowboy, "~> 1.1"},
+      {:cowboy, "~> 2.4"},
       {:jason, "~> 1.1"},
       {:plug, "~> 1.4"}
     ]

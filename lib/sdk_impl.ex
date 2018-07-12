@@ -9,7 +9,7 @@ defmodule SdkImpl do
     Logger.debug("Listening on 'localhost:#{p}'")
 
     children = [
-      {Plug.Adapters.Cowboy, scheme: :http, plug: SdkImpl.Router, options: [port: p]}
+      {Plug.Adapters.Cowboy2, scheme: :http, plug: SdkImpl.Router, options: [port: p]}
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one, name: SdkImpl.Supervisor)
