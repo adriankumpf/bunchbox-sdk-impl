@@ -4,5 +4,5 @@
 
 ```bash
 mix deps.get
-iex -S mix
+PORT=7092 KEY=$webhook_key mix run --no-halt
 ```
